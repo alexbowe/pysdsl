@@ -322,7 +322,7 @@ inline auto add_wavelet_class(py::module& m, const std::string&& name,
             [] (const T& self, typename T::size_type i,
                 typename T::value_type c)
             {
-                if (i >= self.size()) {
+                if (i > self.size()) {
                     throw std::out_of_range(std::to_string(i)); }
                 return self.rank(i, c);
             },
