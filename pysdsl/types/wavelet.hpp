@@ -136,6 +136,7 @@ public:
                                std::string&& name)
     {
         typedef typename T::node_type t_node;
+        typedef typename T::size_type t_size;
 
         try
         {
@@ -200,17 +201,17 @@ public:
             "to value, if wt is lex_ordered.");
         cls.def(
             "interval_symbols",
-            [] (const T& self, size_t i, size_t j) {
+            [] (const T& self, t_size i, t_size j) {
                 if (j > self.size()) {
                     throw std::invalid_argument("j should be less or equal "
                                                 "than size"); }
                 if (i > j) {
                     throw std::invalid_argument("i should be less or equal "
                                                 "than j"); }
-                size_t k;
+                t_size k;
                 std::vector<typename T::value_type> cs(self.sigma);
-                std::vector<size_t> rank_c_i(self.sigma);
-                std::vector<size_t> rank_c_j(self.sigma);
+                std::vector<t_size> rank_c_i(self.sigma);
+                std::vector<t_size> rank_c_j(self.sigma);
 
                 sdsl::interval_symbols(self, i, j, k, cs, rank_c_i, rank_c_j);
 
